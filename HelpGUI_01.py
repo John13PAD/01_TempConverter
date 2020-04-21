@@ -13,12 +13,21 @@ class Converter:#"Foo" and "bar" are just silly names  popularised by MIT about 
         self.converter_frame.grid()
         
         #Temperature Conversion Heading (row 0)
-        self.temp_converter_label = Label(text="Temperature Converter",
+        self.temp_converter_label = Label(self.converter_frame, text="Temperature Converter",
                                           font=("Arial", "32", "bold"),
                                           bg= background_color,
                                           padx=10, pady=10)
         self.temp_converter_label.grid(row=0)
-
+        
+        self.help_button = Button(self.converter_frame, text="Help",
+                                  font=("Arial","14"),
+                                  padx=10, pady=10, command=self.help)
+        self.help_button.grid(row=1)
+        
+    def help(self):
+        print("You asked for help!")
+        get_help = Help(self)
+        get_help.help_text.configure(text="Help text goes here!")
 if __name__ == "__main__":
     root =Tk()# this means when we run root we will create a Tk window
     root.title( "Temperature Converter")
