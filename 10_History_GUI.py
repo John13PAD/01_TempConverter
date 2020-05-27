@@ -2,7 +2,7 @@ from tkinter import * #import all of tkinter tools
 from functools import partial #This prevents unwanted windows
 import random
 class Converter:#"Foo" and "bar" are just silly names  popularised by MIT about 1969
-    def __init__(self, parent):
+    def __init__(self):
         #This is formatting variables
         background_color = "light blue"
         
@@ -17,12 +17,12 @@ class Converter:#"Foo" and "bar" are just silly names  popularised by MIT about 
         #Continue from 15
         
         #Convert main screen GUI
-        self.converter_frame = Frame(width=600, height=600, bg= background_color)
+        self.converter_frame = Frame(width=300, height=300, bg= background_color, pady=10)
         self.converter_frame.grid()
         
         #Temperature Conversion Heading (row 0)
         self.temp_converter_label = Label(self.converter_frame, text="Temperature Converter",
-                                          font=("Arial", "32", "bold"),
+                                          font=("Arial", "16", "bold"),
                                           bg= background_color,
                                           padx=10, pady=10)
         self.temp_converter_label.grid(row=0)
@@ -39,7 +39,7 @@ class Converter:#"Foo" and "bar" are just silly names  popularised by MIT about 
 class history:
     def __init__(self, partner):
 
-        background="#a9ef99" #pale green
+        background="orange" #pale green
 
         #disable history button
         partner.history_button.config(state=DISABLED)
@@ -69,19 +69,29 @@ class history:
         self.history_text.grid(row=1)
         
         #History output goes here
-        self.history_text = Label(self.history_frame, 
-                                  text="Here are your most recent "
-                                       "calcuations. Please use the"
-                                       "export button to create a text "
-                                       "file of all your calculations for" 
-                                       "this session", wrap=250,
-                                       font="arial 10 italic",
-                                       justify=LEFT, width=40, bg=background, )        
+
         ##Dismiss button (row 2)
         #self.dismiss_btn = Button(self.history_frame, text="Dismiss", width=10, bg="white",
                                   #command=partial(self.close_history, partner))
         #self.dismiss_btn.grid(row=2, pady=10)
-
+        
+        #History output goes here.. (row 2)
+        
+        #Export / Dismiss buttons frame (row  3)
+        self.export_dismiss_frame = Frame(self.history_frame)
+        self.export_dismiss_frame.grid(row=3, pady=10)
+        
+        #Export Button
+        self.export_button = Button(self.export_dismiss_frame, text="Export",
+                                                              font="Arial 12 bold")
+        self.export_button.grid(row=0, column=0)
+        
+        #Dismiss Button
+        self.dismiss_button = Button(self.export_dismiss_frame, text="Dismiss",
+                                                              font="Aria 12 bold", command=partial(self.close_history, partner))
+        self.dismiss_button.grid(row=0, column=1)
+        
+        
     def close_history(self, partner):
         #Put history button to normal...
         partner.history_button.config(state=NORMAL)
@@ -90,7 +100,7 @@ if __name__ == "__main__":
     root =Tk()# this means when we run root we will create a Tk window
     root.title( "Temperature Converter")
     # this line puts a header in the window 'paren' that we are opening
-    something = Converter(root)
+    something = Converter()
     #this line places the class Foo into the root window
     root.mainloop()
     #this run the application mainloop in root window
